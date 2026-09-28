@@ -1,0 +1,25 @@
+# lec.ys -- Formal equivalence: RTL (gold) vs synthesized netlist (gate)
+# Usage: yosys scripts/lec.ys   (exit code 0 = proven equivalent)
+#
+# v12: SMT-based temporal induction via the external yosys-smtbmc driver.
+# Why: the built-in `sat -tempinduct` only supports init=0/undef/x, which
+# (a) breaks FFs whose reset value is 1 (tx) and (b) puts the netlist's
+# one-hot FSM into an ILLEGAL state -> false counterexample. smtbmc honors
+# the (* init *) attributes that async2sync creates, so both designs start
+# from their TRUE reset states. Requires: brew install z3.
+
+read_verilog rtl/uart_tx.v
+hierarchy -top uart_tx
+proc
+async2sync
+rename uart_tx gold
+
+read_verilog build/uart_tx_synth.v
+proc
+async2sync
+rename uart_tx gate
+
+flatten gold
+flatten gate
+miter -equiv -make_assert -make_outputs -flatten gold gate miter
+smt2 -wgt build/miter.smt2

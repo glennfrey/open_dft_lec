@@ -1,0 +1,42 @@
+ratio: 0e+0
+faultPoints:
+- data [0]
+- send
+- data [3]
+- data [7]
+- data [1]
+- data [4]
+- tx
+- data [5]
+- done
+- data [2]
+- busy
+- data [6]
+sa0Covered: []
+sa1Covered: []
+sa0Uncovered:
+- data [0]
+- send
+- data [3]
+- data [7]
+- data [1]
+- data [4]
+- tx
+- data [5]
+- done
+- data [2]
+- busy
+- data [6]
+sa1Uncovered:
+- data [0]
+- send
+- data [3]
+- data [7]
+- data [1]
+- data [4]
+- tx
+- data [5]
+- done
+- data [2]
+- busy
+- data [6]

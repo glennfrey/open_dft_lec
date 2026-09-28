@@ -1,0 +1,234 @@
+/* mini.lib -- minimal open standard-cell library (hand-written)
+ * v2: adds rise/fall TRANSITION tables -- ABC's SCL reader requires them
+ * (v1 failed with "Table cannot be found" at abc -liberty).
+ * 7 combinational cells + 5 DFF variants, typical corner.
+ */
+library (mini_tt) {
+  delay_model : table_lookup;
+  technology (cmos);
+  time_unit : "1ns";
+  voltage_unit : "1V";
+  current_unit : "1uA";
+  capacitive_load_unit (1, fF);
+  leakage_power_unit : "1nW";
+  nom_process : 1;
+  nom_voltage : 1.8;
+  nom_temperature : 25;
+  operating_conditions (typical) { process : 1; voltage : 1.8; temperature : 25; }
+  lu_table_template (delay_2x2) {
+    variable_1 : input_net_transition;
+    variable_2 :total_output_net_capacitance;
+    index_1 ("0.01, 0.1");
+    index_2 ("0.001, 0.01");
+  }
+  cell (NOTX1) {
+    area : 1;
+    pin (A) { direction : input; capacitance : 1; }
+    pin (Y) {
+      direction : output;
+      function : "!A";
+      timing () {
+        related_pin : "A";
+        cell_rise (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        rise_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+        cell_fall (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        fall_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+      }    }
+  }
+  cell (AND2X1) {
+    area : 2;
+    pin (A) { direction : input; capacitance : 1; }
+    pin (B) { direction : input; capacitance : 1; }
+    pin (Y) {
+      direction : output;
+      function : "A B";
+      timing () {
+        related_pin : "A";
+        cell_rise (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        rise_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+        cell_fall (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        fall_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+      }      timing () {
+        related_pin : "B";
+        cell_rise (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        rise_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+        cell_fall (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        fall_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+      }    }
+  }
+  cell (OR2X1) {
+    area : 2;
+    pin (A) { direction : input; capacitance : 1; }
+    pin (B) { direction : input; capacitance : 1; }
+    pin (Y) {
+      direction : output;
+      function : "A + B";
+      timing () {
+        related_pin : "A";
+        cell_rise (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        rise_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+        cell_fall (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        fall_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+      }      timing () {
+        related_pin : "B";
+        cell_rise (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        rise_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+        cell_fall (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        fall_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+      }    }
+  }
+  cell (NAND2X1) {
+    area : 2;
+    pin (A) { direction : input; capacitance : 1; }
+    pin (B) { direction : input; capacitance : 1; }
+    pin (Y) {
+      direction : output;
+      function : "!(A B)";
+      timing () {
+        related_pin : "A";
+        cell_rise (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        rise_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+        cell_fall (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        fall_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+      }      timing () {
+        related_pin : "B";
+        cell_rise (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        rise_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+        cell_fall (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        fall_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+      }    }
+  }
+  cell (NOR2X1) {
+    area : 2;
+    pin (A) { direction : input; capacitance : 1; }
+    pin (B) { direction : input; capacitance : 1; }
+    pin (Y) {
+      direction : output;
+      function : "!(A + B)";
+      timing () {
+        related_pin : "A";
+        cell_rise (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        rise_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+        cell_fall (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        fall_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+      }      timing () {
+        related_pin : "B";
+        cell_rise (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        rise_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+        cell_fall (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        fall_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+      }    }
+  }
+  cell (XOR2X1) {
+    area : 3;
+    pin (A) { direction : input; capacitance : 1; }
+    pin (B) { direction : input; capacitance : 1; }
+    pin (Y) {
+      direction : output;
+      function : "(A * !B) + (!A * B)";
+      timing () {
+        related_pin : "A";
+        cell_rise (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        rise_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+        cell_fall (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        fall_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+      }      timing () {
+        related_pin : "B";
+        cell_rise (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        rise_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+        cell_fall (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        fall_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+      }    }
+  }
+  cell (MUX2X1) {
+    area : 3;
+    pin (A) { direction : input; capacitance : 1; }
+    pin (B) { direction : input; capacitance : 1; }
+    pin (S) { direction : input; capacitance : 1; }
+    pin (Y) {
+      direction : output;
+      function : "(B * S) + (A * !S)";
+      timing () {
+        related_pin : "A";
+        cell_rise (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        rise_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+        cell_fall (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        fall_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+      }      timing () {
+        related_pin : "B";
+        cell_rise (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        rise_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+        cell_fall (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        fall_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+      }      timing () {
+        related_pin : "S";
+        cell_rise (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        rise_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+        cell_fall (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.02, 0.03", "0.03, 0.05"); }
+        fall_transition (delay_2x2) { index_1 ("0.01, 0.1"); index_2 ("0.001, 0.01"); values ("0.01, 0.02", "0.02, 0.03"); }
+      }    }
+  }
+  cell (DFFPOSX1) {
+    area : 4;
+    pin (D)   { direction : input; capacitance : 1; }
+    pin (CLK) { direction : input; capacitance : 1; clock : true; }
+    pin (Q)   { direction : output; function : "IQ"; }
+    ff (IQ, IQN) {
+      clocked_on : CLK;
+      next_state : D;
+
+    }
+  }
+  cell (DFFRPOSX1) {
+    area : 5;
+    pin (D)   { direction : input; capacitance : 1; }
+    pin (CLK) { direction : input; capacitance : 1; clock : true; }
+    pin (RSTn) { direction : input; capacitance : 1; }
+    pin (Q)   { direction : output; function : "IQ"; }
+    ff (IQ, IQN) {
+      clocked_on : CLK;
+      next_state : D;
+      clear : "!RSTn";
+    }
+  }
+  cell (DFFSPOSX1) {
+    area : 5;
+    pin (D)   { direction : input; capacitance : 1; }
+    pin (CLK) { direction : input; capacitance : 1; clock : true; }
+    pin (SETn) { direction : input; capacitance : 1; }
+    pin (Q)   { direction : output; function : "IQ"; }
+    ff (IQ, IQN) {
+      clocked_on : CLK;
+      next_state : D;
+      preset : "!SETn";
+    }
+  }
+  cell (DFFREPOSX1) {
+    area : 6;
+    pin (D)   { direction : input; capacitance : 1; }
+    pin (CLK) { direction : input; capacitance : 1; clock : true; }
+    pin (RSTn) { direction : input; capacitance : 1; }
+    pin (EN) { direction : input; capacitance : 1; }
+    pin (Q)   { direction : output; function : "IQ"; }
+    ff (IQ, IQN) {
+      clocked_on : CLK;
+      next_state : D;
+      clear : "!RSTn";
+      enable : EN;
+    }
+  }
+  cell (DFFSEPOSX1) {
+    area : 6;
+    pin (D)   { direction : input; capacitance : 1; }
+    pin (CLK) { direction : input; capacitance : 1; clock : true; }
+    pin (SETn) { direction : input; capacitance : 1; }
+    pin (EN) { direction : input; capacitance : 1; }
+    pin (Q)   { direction : output; function : "IQ"; }
+    ff (IQ, IQN) {
+      clocked_on : CLK;
+      next_state : D;
+      preset : "!SETn";
+      enable : EN;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+# synth_manual.ys -- synthesis for fault-dft flow (NO dfflibmap)
+# FFs stay as generic $_DFF_* cells; fault cut detects them and replaces
+# with scan FFs. Then atpg simulates the cut netlist for coverage.
+read_verilog rtl/uart_tx.v
+hierarchy -top uart_tx
+proc; opt
+fsm; opt
+memory; opt
+techmap; opt
+flatten; opt
+# NO dfflibmap here — fault cut needs generic $_DFF_* cells
+simplemap
+opt
+clean -purge
+write_verilog -noattr build/uart_tx_net.v

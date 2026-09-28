@@ -1,0 +1,64 @@
+{
+  "outputs" : [
+    {
+      "ordinal" : 4,
+      "to" : 0,
+      "polarity" : "output",
+      "name" : "tx",
+      "from" : 0
+    },
+    {
+      "ordinal" : 5,
+      "to" : 0,
+      "polarity" : "output",
+      "name" : "busy",
+      "from" : 0
+    },
+    {
+      "ordinal" : 6,
+      "to" : 0,
+      "polarity" : "output",
+      "name" : "done",
+      "from" : 0
+    }
+  ],
+  "coverageList" : [
+    {
+      "goldenOutput" : "",
+      "vector" : [
+        [
+          "+",
+          10
+        ],
+        [
+          "+",
+          1
+        ]
+      ],
+      "coverage" : {
+        "sa1" : [
+
+        ],
+        "sa0" : [
+
+        ]
+      }
+    }
+  ],
+  "inputs" : [
+    {
+      "ordinal" : 2,
+      "to" : 0,
+      "polarity" : "input",
+      "name" : "data",
+      "from" : 7
+    },
+    {
+      "ordinal" : 3,
+      "to" : 0,
+      "polarity" : "input",
+      "name" : "send",
+      "from" : 0
+    }
+  ]
+}

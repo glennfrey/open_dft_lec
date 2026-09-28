@@ -1,0 +1,22 @@
+# lec_miter.ys -- SAT-miter NEGATIVE test (bug-hunting demo)
+# Run:  cp rtl/uart_tx_buggy.v build/uart_tx_synth.v
+#       yosys scripts/lec_miter.ys
+# Expected: solver FINDS a counterexample (shift-direction bug).
+#
+# v12: same structure as lec.ys.
+
+read_verilog rtl/uart_tx.v
+hierarchy -top uart_tx
+proc
+async2sync
+rename uart_tx gold
+
+read_verilog build/uart_tx_synth.v
+proc
+async2sync
+rename uart_tx gate
+
+flatten gold
+flatten gate
+miter -equiv -make_assert -make_outputs -flatten gold gate miter
+smt2 -wgt build/miter.smt2
