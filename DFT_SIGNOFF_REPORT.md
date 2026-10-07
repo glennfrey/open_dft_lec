@@ -4,8 +4,6 @@
 |---|---|
 | **Project** | uart_tx — Open DFT + LEC demonstration flow |
 | **Design revision** | ⟨git commit hash / tag⟩ |
-| **Target role** | Senior Integration Design Engineer — Silicon Integration (DFT/ATPG/LEC focus) |
-| **Report owner** | ⟨your name⟩ |
 | **Date** | ⟨YYYY-MM-DD⟩ |
 | **Sign-off status** | ☐ CONDITIONAL PASS  ☐ FAIL  ☐ WAIVED (justify in §7) |
 
@@ -124,18 +122,6 @@ All DFT insertion, ATPG, and equivalence checks for block `uart_tx` at
 revision ⟨hash⟩ are complete per §4–§7. Exceptions are listed in §7 and
 §8. **Signed:** ⟨name / date⟩
 
----
-
-## Appendix A — JD mapping (Senior Integration Design Engineer, Lattice)
-
-| JD requirement | This report |
-|---|---|
-| "Knowledge in DFT flow" (required) | §6 scan insertion + JTAG TAP |
-| "ATPG generation" (required) | §7 coverage & pattern report |
-| "Equivalence Check ... industry standard tools" | §5 LEC results + negative test |
-| "tapeout-gating audits" | This document, in total |
-| "verification is a plus" (Perl/TCL/Shell/Python) | The Makefile + Yosys/Fault scripts are automatable — mention `make dft` |
-| "RTL coding and verification" | §4 + RTL/TB in repo |
 
 ## Appendix B — Reproduce
 
