@@ -1,8 +1,7 @@
 # open_dft_lec -- Open-Source DFT + Equivalence-Checking Project
 
 Portfolio project aimed at the **Senior Design Engineer** role
-(Silicon Integration Team: fullchip IP integration, DFT, ATPG, equivalence
-checking, tapeout-gating audits). Built entirely with open-source EDA tools.
+Built entirely with open-source EDA tools.
 
 ## Toolchain
 
@@ -43,10 +42,9 @@ rtl/uart_tx.v --+--> iverilog (golden TB) --> PASS
     make dft        # Fault toolchain: synth/cut/atpg/compact/chain/tap
     make clean
 
-## What to collect for your resume / interview
-
+## Notes
 1. `make lec` transcript showing `equiv_status` all-proven.
-2. `make lec-bug` counterexample from the SAT miter (show it in interviews!).
+2. `make lec-bug` counterexample from the SAT miter 
 3. Fault ATPG summary: stuck-at fault coverage %, pattern count, count after
    `fault compact` (compaction ratio).
 4. Scan-chain netlist: show SE/SI/SO pins in `uart_tx_scan.v`.
