@@ -57,7 +57,7 @@ rtl/uart_tx.v --+--> iverilog (golden TB) --> PASS
 - Fault's pseudo-random ATPG trades pattern optimality for library
   independence; bundled Atalanta/PODEM are free but proprietary for
   commercial use.
-- This flow demonstrates the *concepts* the JD asks for (DFT insertion,
+- This flow demonstrates the *concepts* for (DFT insertion,
   ATPG, equivalence, coverage sign-off) -- be ready to map them to
   Tessent/Conformal terminology.
 
