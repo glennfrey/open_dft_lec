@@ -52,7 +52,7 @@ rtl/uart_tx.v --+--> iverilog (golden TB) --> PASS
 4. Scan-chain netlist: show SE/SI/SO pins in `uart_tx_scan.v`.
 5. JTAG TAP netlist: TDI/TMS/TDO/TCK/TRST pins in `uart_tx_tap.v`.
 
-## Honest limitations (senior-level talking points)
+## Honest limitations
 
 - Open-source ATPG (Fault) targets **stuck-at** faults; transition/at-speed
   and bridging faults are the domain of commercial tools (TetraMAX/ATPG-Fast).
