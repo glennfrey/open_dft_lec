@@ -1,6 +1,6 @@
 # open_dft_lec -- Open-Source DFT + Equivalence-Checking Project
 
-Portfolio project aimed at the **Senior Integration Design Engineer** role
+Portfolio project aimed at the **Senior Design Engineer** role
 (Silicon Integration Team: fullchip IP integration, DFT, ATPG, equivalence
 checking, tapeout-gating audits). Built entirely with open-source EDA tools.
 
@@ -71,9 +71,9 @@ rtl/uart_tx.v --+--> iverilog (golden TB) --> PASS
   Open-Source EDA's Missing DFT Toolchain"
 - Yosys LEC: `help equiv_make`, `help sat` inside yosys
 
-## Milestones -> JD mapping
+## Milestones 
 
-| Milestone | JD bullet |
+| Milestone |
 |---|---|
 | make synth + make lec | "Synthesis, Equivalence Check ... industry standard tools" |
 | make dft (chain/tap) | "Knowledge in DFT flow" (required skill) |
