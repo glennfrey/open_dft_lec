@@ -53,7 +53,7 @@ rtl/uart_tx.v --+--> iverilog (golden TB) --> PASS
     make sim_tdf      # TDF: 2-pattern at-speed test (manual demo)
     make clean
 
-## What to collect for your resume / interview
+## To Do
 
 1. `make lec` transcript showing equivalence proven — demonstrates formal (Linux)
    or simulation-based lockstep (macOS) verification methodology.
