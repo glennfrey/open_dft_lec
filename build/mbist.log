@@ -1,0 +1,47 @@
+[TB] Starting MBIST tests ...
+[TB] Test 1: Good memory (no fault injection)
+  PASS: Good memory correctly reported PASS
+[TB] Test 2: Inverted data fault (all bits flipped)
+  DEBUG MBIST FAIL: state=0010 addr=0 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0010 addr=1 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0010 addr=2 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0010 addr=3 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0010 addr=4 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0010 addr=5 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0010 addr=6 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0010 addr=7 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0011 addr=0 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0011 addr=1 got=0000 expected=ffff
+  DEBUG MBIST FAIL: state=0011 addr=2 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0011 addr=3 got=0000 expected=ffff
+  DEBUG MBIST FAIL: state=0011 addr=4 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0011 addr=5 got=0000 expected=ffff
+  DEBUG MBIST FAIL: state=0011 addr=6 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0011 addr=7 got=0000 expected=ffff
+  DEBUG MBIST FAIL: state=0100 addr=7 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0100 addr=6 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0100 addr=5 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0100 addr=4 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0100 addr=3 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0100 addr=2 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0100 addr=1 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0100 addr=0 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0101 addr=7 got=0000 expected=ffff
+  DEBUG MBIST FAIL: state=0101 addr=6 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0101 addr=5 got=0000 expected=ffff
+  DEBUG MBIST FAIL: state=0101 addr=4 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0101 addr=3 got=0000 expected=ffff
+  DEBUG MBIST FAIL: state=0101 addr=2 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0101 addr=1 got=0000 expected=ffff
+  DEBUG MBIST FAIL: state=0101 addr=0 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0110 addr=0 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0110 addr=1 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0110 addr=2 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0110 addr=3 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0110 addr=4 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0110 addr=5 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0110 addr=6 got=ffff expected=0000
+  DEBUG MBIST FAIL: state=0110 addr=7 got=ffff expected=0000
+  PASS: Faulty memory correctly detected and reported FAIL
+TESTBENCH PASSED (MBIST detects both good and faulty memory)
+tb/tb_mbist.v:106: $finish called at 1115000 (1ps)

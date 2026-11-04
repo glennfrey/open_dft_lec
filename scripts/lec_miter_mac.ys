@@ -1,0 +1,16 @@
+# lec_miter_mac.ys -- Bug demo for Mac
+# Run: cp rtl/uart_tx_buggy.v build/uart_tx_synth.v && yosys scripts/lec_miter_mac.ys
+
+read_verilog rtl/uart_tx.v
+hierarchy -top uart_tx
+synth -top uart_tx -flatten
+rename uart_tx gold
+
+read_verilog build/uart_tx_synth.v
+hierarchy -top uart_tx
+flatten
+rename uart_tx gate
+
+miter -equiv -make_assert -make_outputs -flatten gold gate miter
+
+sat -prove-asserts -seq 20 miter
